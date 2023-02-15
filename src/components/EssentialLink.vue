@@ -24,7 +24,7 @@ export default defineComponent({
     },
     link: {
       type: String,
-      default: '/'
+      default: '/dashboard'
     },
     icon: {
       type: String,

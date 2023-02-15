@@ -1,8 +1,13 @@
 <template>
-  <q-scroll-area class="h-full" style="height: calc(100% - 100px);">
+  <q-scroll-area
+      :thumb-style="thumbStyle"
+      :bar-style="barStyle"
+      style="height: calc(100% - 90px);">
       <q-table
         :rows="rows"
         :columns="columns"
+        :loading="loading"
+        :filter="filter"
         row-key="name"
         class="text-center"
         hide-pagination
@@ -14,7 +19,7 @@
               v-for="col in props.cols"
               :key="col.name"
               :props="props"
-              class="text-lg font-medium text-[#031529] text-center">
+              class="text-[#031529] text-center">
               {{ col.label }}
             </q-th>
           </q-tr>
@@ -28,9 +33,9 @@
             </q-td>
             <q-td key="state" :props="props" class="text-left">
               <div class="pl-14">Holati:
-                <span v-if="props.row.status==1" class="text-[#031529] font-medium bg-[#cf3d34] p-1 rounded">{{ props.row.state }}</span>
-                <span v-if="props.row.status==2" class="text-[#031529] font-medium bg-[#ebb93b] p-1 rounded">{{ props.row.state }}</span>
-                <span v-if="props.row.status==3" class="text-[#031529] font-medium bg-[#34cf4d] p-1 rounded">{{ props.row.state }}</span>
+                <span v-if="props.row.status==1" class="text-[#ffffff] font-normal bg-[#cf3d34] p-1 rounded">{{ props.row.state }}</span>
+                <span v-if="props.row.status==2" class="text-[#ffffff] font-normal bg-[#ebb93b] p-1 rounded">{{ props.row.state }}</span>
+                <span v-if="props.row.status==3" class="text-[#ffffff] font-normal bg-[#34cf4d] p-1 rounded">{{ props.row.state }}</span>
               </div>
               <div class="pl-14">Vaqti: <span class="text-[#031529] font-medium">{{ props.row.time }}</span></div>
               <div class="pl-14">Mazmuni: <span class="text-[#031529] font-medium">{{ props.row.about }}</span></div>
@@ -69,11 +74,13 @@ const columns = [
     align: 'left',
     field: row => row.name,
     format: val => `${val}`,
-    sortable: true
+    sortable: true,
+    style: 'font-size: 18px',
+    headerStyle: 'font-weight: 500; font-size: 18px'
   },
-  { name: 'state', align: 'left', label: 'Murojat', field: 'murojat', sortable: true },
-  { name: 'answer', align: 'left', label: 'Javob', field: 'javob', sortable: true },
-  { name: 'operator', align: 'left', label: 'Operator', field: 'operator' },
+  { name: 'state', align: 'left', label: 'Murojat', field: 'murojat', sortable: true, style: 'font-size: 18px', headerStyle: 'font-weight: 500; font-size: 18px'},
+  { name: 'answer', align: 'left', label: 'Javob', field: 'javob', sortable: true, style: 'font-size: 18px', headerStyle: 'font-weight: 500; font-size: 18px' },
+  { name: 'operator', align: 'left', label: 'Operator', field: 'operator', style: 'font-size: 18px', headerStyle: 'font-weight: 500; font-size: 18px' },
 
 ]
 
@@ -214,9 +221,23 @@ export default defineComponent({
   setup () {
     const dialog = ref(false)
     const position = ref('right')
+    const loading = ref(false)
     return {
+      thumbStyle: {
+        backgroundColor: '#002955',
+        height: '50px',
+        width: '9px',
+        opacity: 0.8
+      },
+
+      barStyle: {
+        backgroundColor: 'rgb(196, 196, 196)',
+        width: '9px',
+        opacity: 0.7
+      },
       columns,
       rows,
+      filter: {},
       pagination: {
       sortBy: 'desc',
       descending: false,
@@ -226,15 +247,13 @@ export default defineComponent({
     },
     dialog,
     position,
+    loading,
 
     open (pos, row) {
       if(row === 2 || row===3){
         return position.value = pos, dialog.value = true
       }
-
-      // position.value = pos
-      // dialog.value = true
-    }
+    },
     }
   },
 })

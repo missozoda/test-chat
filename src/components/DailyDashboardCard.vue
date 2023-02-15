@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-box shadow-5 mb-[48px] h-[885px]">
+  <div class="shadow-box shadow-5 h-[calc(100vh-100px)]">
     <div class="header grid grid-cols-4">
       <div class="col-span-3 bg-[#002955]/10 py-[18px] pl-[26px] text-[28px] font-medium text-[#002955]">Kun kesimida</div>
       <div class="col-span-1 bg-white py-[16px] px-[35px] text-xl text-[#002955]">Fevral
@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="col-span-4 border-b-2 border-[#002955]/10 ml-[26px] mt-[23px]"></div>
-    <q-scroll-area class="h-[740px]">
+    <q-scroll-area :thumb-style="thumbStyle" :bar-style="barStyle" class="h-[calc(100%-110px)]">
       <div class="ml-[26px] mr-[33px] mt-[30px] mb-[45px]">
         <div class="grid grid-cols-4 mb-[19px]" v-for="dailyData in dailyDatas" :key="dailyData" >
           <div class="col-span-3 text-lg mb-[16px] text-[#031529] italic">01.02.2022</div>
@@ -62,6 +62,22 @@ export default {
         color: '#CC6A54'
       }
     ]
-  })
+  }),
+  setup () {
+    return {
+      thumbStyle: {
+        backgroundColor: '#002955',
+        height: '50px',
+        width: '9px',
+        opacity: 0.8
+      },
+
+      barStyle: {
+        backgroundColor: 'rgb(196, 196, 196)',
+        width: '9px',
+        opacity: 0.7
+      },
+    }
+  }
 }
 </script>

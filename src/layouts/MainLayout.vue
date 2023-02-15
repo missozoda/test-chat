@@ -13,11 +13,14 @@
 
         <q-toolbar-title class="text-[28px] font-medium" >
           {{this.currentUrl}}
+          {{ $router.name }}
         </q-toolbar-title>
 
         <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="notifications_none" aria-label="notification"></q-btn>
-        <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="fullscreen" aria-label="fullscreen"></q-btn>
-        <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="input" aria-label="input"></q-btn>
+        <div v-if="$q.screen.width>=560" class="mr-[32px]">
+          <q-btn round flat :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" @click="$q.fullscreen.toggle()"/>
+        </div>
+        <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="input" aria-label="input" @click="$router.push('/')"></q-btn>
       </q-toolbar>
     </q-header>
 
@@ -55,7 +58,7 @@ const linksList = [
   {
     title: 'Dashboard',
     icon: 'dashboard',
-    link: '/'
+    link: '/dashboard'
   },
   {
     title: 'Appeals',
@@ -88,8 +91,14 @@ export default defineComponent({
   },
   data:()=>({
     logo,
-    currentUrl:localStorage.getItem('link') || "Dashboard",
+    // currentUrl:localStorage.getItem('link') || "Dashboard",
   }),
+  computed:{
+    currentUrl(){
+      console.log(this.$router.currentRoute.value.name);
+      return this.$router.currentRoute.value.name
+    }
+  },
 
   setup () {
     const leftDrawerOpen = ref(false)
