@@ -2,10 +2,10 @@
   <router-link :to="link">
     <q-item clickable @click="setLink(title)">
       <q-item-section v-if="icon" avatar>
-        <q-icon class="material-icons-outlined font-normal" size="32px" :name="icon" />
+        <q-icon class="material-icons-outlined font-normal" :size="$q.screen.md ? '28px': '24px'" :name="icon" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>{{ title }}</q-item-label>
+        <q-item-label class="text-[18px] lg:text-[24px]">{{ title }}</q-item-label>
       </q-item-section>
     </q-item>
   </router-link>

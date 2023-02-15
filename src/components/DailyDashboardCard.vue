@@ -1,24 +1,26 @@
 <template>
-  <div class="shadow-box shadow-5 h-[calc(100vh-100px)]">
+  <div class="shadow-box shadow-5 h-[calc(100vh-100px)] mb-4">
     <div class="header grid grid-cols-4">
-      <div class="col-span-3 bg-[#002955]/10 py-[18px] pl-[26px] text-[28px] font-medium text-[#002955]">Kun kesimida</div>
-      <div class="col-span-1 bg-white py-[16px] px-[35px] text-xl text-[#002955]">Fevral
-        <span class="block text-sm mx-[10px]">2022</span>
+      <div class="col-span-3 bg-[#002955]/10 py-[12px] xl:py-[16px] 2xl:py-[18px] pl-[26px] text-[18px] min-[450px]:text-[24px] md:text-[28px] font-medium text-[#002955]">Kun kesimida</div>
+      <div class="col-span-1 bg-white py-[6px] sm:py-[10px] xl:py-[12px] 2xl:py-[16px] mx-auto text-base sm:text-xl text-[#002955] text-center">Fevral
+        <span class="block text-xs sm:text-sm mx-auto">2022</span>
       </div>
     </div>
-    <div class="col-span-4 border-b-2 border-[#002955]/10 ml-[26px] mt-[23px]"></div>
-    <q-scroll-area :thumb-style="thumbStyle" :bar-style="barStyle" class="h-[calc(100%-110px)]">
-      <div class="ml-[26px] mr-[33px] mt-[30px] mb-[45px]">
-        <div class="grid grid-cols-4 mb-[19px]" v-for="dailyData in dailyDatas" :key="dailyData" >
-          <div class="col-span-3 text-lg mb-[16px] text-[#031529] italic">01.02.2022</div>
-          <div class="col-span-1 text-2xl mb-[12px] text-end font-medium"
+    <div class="col-span-4 border-b-2 border-[#002955]/10 ml-[24px] mt-[12px] md:mt-[22px]"></div>
+    <q-scroll-area :thumb-style="thumbStyle" :bar-style="barStyle" class="h-[85%]">
+      <div class="mx-[18px] sm:mx-[24px] mt-[16px] md:mt-[28px] mb-[20px] md:mb-[36px]">
+        <div class="grid grid-cols-4 mb-[18px]" v-for="dailyData in dailyDatas" :key="dailyData" >
+
+          <div class="col-span-3 text-sm min-[450px]:text-lg mb-[8px] sm:mb-[16px] text-[#031529] italic">01.02.2022</div>
+          <div class="col-span-1 text-xl min-[450px]:text-2xl mb-[6px] sm:mb-[12px] text-end font-medium"
           :style="{'color': dailyData.color}"
           >{{ Math.round(dailyData.conApp / dailyData.allApp * 100) }}% </div>
-          <div class="col-span-3 text-lg mb-[10px] text-[#58636F]">Kelib tushgan murojatlar soni</div>
-          <div class="col-span-1 text-xl mb-[8px] text-end text-[#031529]">{{dailyData.allApp}}</div>
-          <div class="col-span-3 text-lg mb-[15px] text-[#58636F]">Javob berilganlar soni</div>
-          <div class="col-span-1 text-xl mb-[13px] text-end text-[#031529]">{{ dailyData.conApp }}</div>
+          <div class="col-span-3 text-sm min-[450px]:text-lg mb-[6px] sm:mb-[10px] text-[#58636F]">Kelib tushgan murojatlar soni</div>
+          <div class="col-span-1 text-base min-[450px]:text-xl mb-[4px] sm:mb-[8px] text-end text-[#031529]">{{dailyData.allApp}}</div>
+          <div class="col-span-3 text-sm min-[450px]:text-lg mb-[10px] sm:mb-[14px] text-[#58636F]">Javob berilganlar soni</div>
+          <div class="col-span-1 text-base min-[450px]:text-xl mb-[6px] sm:mb-[12px] text-end text-[#031529]">{{ dailyData.conApp }}</div>
           <div class="col-span-4 border-b border-[#002955]/10 h-0"></div>
+
         </div>
       </div>
     </q-scroll-area>
@@ -67,7 +69,6 @@ export default {
     return {
       thumbStyle: {
         backgroundColor: '#002955',
-        height: '50px',
         width: '9px',
         opacity: 0.8
       },

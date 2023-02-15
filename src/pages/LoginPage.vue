@@ -1,14 +1,14 @@
 <template>
   <q-page class="flex flex-center">
     <div class="row bg-indigo-9" style="height: 100vh; width: 100%;">
-      <q-card class="w-1/3 h-2/3 mx-auto my-auto shadow-20">
+      <q-card class="w-[90%] h-[90%] sm:w-[80%] sm:h-[80%] lg:w-[60%] mx-auto my-auto shadow-20">
         <q-form ref="loginForm" @submit="onSubmit" @reset="onReset" @validation-error="onValidationError"
             class="overflow-auto flex items-center q-mx-auto" :class="$q.screen.xs ? '' : 'q-pa-md' ">
       <div class="column items-center justify-center q-mx-auto q-mt-xl">
         <div class="text-center q-my-xl q-mx-auto">
           <img src="../assets/kadastr.svg" alt="Kadastr agentligi" width="205" height="76"/>
         </div>
-        <div class="text-center text-h4 text-indigo-10 text-weight-medium q-mx-auto">
+        <div class="text-center text-[24px] md:text-[32px] text-indigo-10 text-weight-medium q-mx-auto">
             Login
         </div>
         <div class="q-pa-lg">

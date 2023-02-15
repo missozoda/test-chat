@@ -11,16 +11,15 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title class="text-[28px] font-medium" >
+        <q-toolbar-title class="text-[20px] lg:text-[28px] font-medium inline-block" >
           {{this.currentUrl}}
-          {{ $router.name }}
         </q-toolbar-title>
 
-        <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="notifications_none" aria-label="notification"></q-btn>
-        <div v-if="$q.screen.width>=560" class="mr-[32px]">
+        <q-btn class="mr-[16px] md:mr-[32px] w-[26px] md:w-[32px] h-[26px] md:h-[32px]" flat dense round icon="notifications_none" aria-label="notification"></q-btn>
+        <div v-if="$q.screen.width>=560" class="mr-[16px] md:mr-[32px]">
           <q-btn round flat :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" @click="$q.fullscreen.toggle()"/>
         </div>
-        <q-btn class="mr-[32px] w-[32px] h-[32px]" flat dense round icon="input" aria-label="input" @click="$router.push('/')"></q-btn>
+        <q-btn class="mr-[16px] md:mr-[32px] w-[26px] md:w-[32px] h-[26px] md:h-[32px]" flat dense round icon="input" aria-label="input" @click="$router.push('/')"></q-btn>
       </q-toolbar>
     </q-header>
 
@@ -35,7 +34,7 @@
 
         </q-item-label>
 
-        <EssentialLink class="text-white text-2xl font-medium py-5 pl-10"
+        <EssentialLink class="text-white text-lg md:text-2xl font-medium py-0 md:py-5 pl-10"
         v-for="link in essentialLinks" :key="link.title" v-bind="link" @click="getUrl()" />
       </q-list>
     </q-drawer>
@@ -95,7 +94,6 @@ export default defineComponent({
   }),
   computed:{
     currentUrl(){
-      console.log(this.$router.currentRoute.value.name);
       return this.$router.currentRoute.value.name
     }
   },
