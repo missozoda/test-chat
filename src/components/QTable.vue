@@ -4,6 +4,7 @@
       :bar-style="barStyle"
       style="height: 85%">
       <q-table
+        :dense="$q.screen.lt.md"
         :rows="rows"
         :columns="columns"
         :loading="loading"
@@ -20,35 +21,35 @@
               :key="col.name"
               :props="props"
               class="text-[#031529] text-center">
-              {{ col.label }}
+              {{ $t(col.label) }}
             </q-th>
           </q-tr>
         </template>
         <template v-slot:body="props">
           <q-tr :props="props" class="text-sm md:text-base xl:text-lg font-normal text-[#58636f]" clickable  @click="open('right',props.row.status)">
             <q-td key="name" :props="props">
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">F.I.Sh <span class="text-[#031529] font-medium">{{ props.row.name }}</span></div>
-              <div  class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Tel: <span class="text-[#031529] font-medium">{{ props.row.tel }}</span></div>
-              <div  class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Yaratildi: <span class="text-[#031529] font-medium">{{ props.row.time }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('full_name') }}: <span class="text-[#031529] font-medium">{{ props.row.name }}</span></div>
+              <div  class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('phone') }}: <span class="text-[#031529] font-medium">{{ props.row.tel }}</span></div>
+              <div  class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('created_by') }}: <span class="text-[#031529] font-medium">{{ props.row.time }}</span></div>
             </q-td>
             <q-td key="state" :props="props" class="text-left">
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Holati:
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('status') }}:
                 <span v-if="props.row.status==1" class="text-[#ffffff] font-normal bg-[#cf3d34] p-1 rounded">{{ props.row.state }}</span>
                 <span v-if="props.row.status==2" class="text-[#ffffff] font-normal bg-[#ebb93b] p-1 rounded">{{ props.row.state }}</span>
                 <span v-if="props.row.status==3" class="text-[#ffffff] font-normal bg-[#34cf4d] p-1 rounded">{{ props.row.state }}</span>
               </div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Vaqti: <span class="text-[#031529] font-medium">{{ props.row.time }}</span></div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Mazmuni: <span class="text-[#031529] font-medium">{{ props.row.about }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('time') }}: <span class="text-[#031529] font-medium">{{ props.row.time }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('content') }}: <span class="text-[#031529] font-medium">{{ props.row.about }}</span></div>
             </q-td>
             <q-td key="answer" :props="props" class="text-left">
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Qabul qilindi: <span class="text-[#031529] font-medium">{{ props.row.received }}</span></div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Javob berildi: <span class="text-[#031529] font-medium">{{ props.row.answer }}</span></div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Vaqtlar farqi: <span class="text-[#031529] font-medium">{{ props.row.timedifference }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('received') }}: <span class="text-[#031529] font-medium">{{ props.row.received }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('answered') }}: <span class="text-[#031529] font-medium">{{ props.row.answer }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('time_difference') }}: <span class="text-[#031529] font-medium">{{ props.row.timedifference }}</span></div>
             </q-td>
             <q-td key="operator" :props="props" class="text-left">
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">F.I.Sh: <span class="text-[#031529] font-medium">{{ props.row.operatorName }}</span></div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Tel: <span class="text-[#031529] font-medium">{{ props.row.operatorTel }}</span></div>
-              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">Holati: <span class="text-[#031529] font-medium">{{ props.row.operatorState }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('full_name') }}: <span class="text-[#031529] font-medium">{{ props.row.operatorName }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('phone') }}: <span class="text-[#031529] font-medium">{{ props.row.operatorTel }}</span></div>
+              <div class="pl-2 md:pl-8 lg:pl-14 text-sm lg:text-base xl:text-lg">{{ $t('status') }}: <span class="text-[#031529] font-medium">{{ props.row.operatorState }}</span></div>
             </q-td>
           </q-tr>
         </template>
@@ -70,16 +71,16 @@ const columns = [
   {
     name: 'name',
     required: true,
-    label: 'Mijoz',
+    label: 'client',
     align: 'left',
     field: row => row.name,
     format: val => `${val}`,
     sortable: true,
     headerStyle: 'font-weight: 500; font-size: 18px'
   },
-  { name: 'state', align: 'left', label: 'Murojat', field: 'murojat', sortable: true, headerStyle: 'font-weight: 500; font-size: 18px'},
-  { name: 'answer', align: 'left', label: 'Javob', field: 'javob', sortable: true, headerStyle: 'font-weight: 500; font-size: 18px' },
-  { name: 'operator', align: 'left', label: 'Operator', field: 'operator', headerStyle: 'font-weight: 500; font-size: 18px' },
+  { name: 'state', align: 'left', label: 'appeal', field: 'murojat', sortable: true, headerStyle: 'font-weight: 500; font-size: 18px'},
+  { name: 'answer', align: 'left', label: 'answer', field: 'javob', sortable: true, headerStyle: 'font-weight: 500; font-size: 18px' },
+  { name: 'operator', align: 'left', label: 'operator', field: 'operator', headerStyle: 'font-weight: 500; font-size: 18px' },
 
 ]
 

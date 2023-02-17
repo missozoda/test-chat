@@ -1,7 +1,11 @@
-// export function someGetter (/* state */) {
-// }
 export default {
-  getRouter(state){
-    return state.link
+  getUser(state) {
+    return state.user
+  },
+  getRoutes(state) {
+    return state.routes
+  },
+  getCurrentRouteName(state) {
+    return state.currentRouteName;
   }
 }

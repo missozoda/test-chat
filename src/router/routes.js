@@ -16,11 +16,11 @@ const routes = [
     path: '/dashboard',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue'), name:"Dashboard" },
-      {path: '/appeals', component: () => import('pages/AppealsPage.vue'), name:"Appeals" },
-      {path: '/operators', component: () => import('pages/OperatorsPage.vue'), name:"Operators" },
-      {path: '/settings', component: () => import('pages/SettingsPage.vue'), name:"Settings" },
-      {path: '/help', component: () => import('pages/HelpPage.vue'), name:"Help" },
+      { path: '', component: () => import('pages/IndexPage.vue'), name:"dashboard" },
+      {path: '/appeals', component: () => import('pages/AppealsPage.vue'), name:"appeals" },
+      {path: '/operators', component: () => import('pages/OperatorsPage.vue'), name:"operators" },
+      {path: '/settings', component: () => import('pages/SettingsPage.vue'), name:"settings" },
+      {path: '/help', component: () => import('pages/HelpPage.vue'), name:"help" },
     ]
   },
 

@@ -1,8 +1,8 @@
 <template>
   <div class="h-full w-[460px] shadow-box shadow-5 overflow-hidden">
     <div class="header w-[430px] text-lg font-normal text-[#58636f] pl-[30px] pt-[28px] pb-[14px] bg-white">
-      <p class="name p-0 m-0 mb-2">F.I.Sh <span class="text-[#031529] font-medium">Ivan Ivanov</span></p>
-      <p class="tel p-0 m-0">Tel: <span class="text-[#031529] font-medium">+998 (99) 321-44-55</span></p>
+      <p class="name p-0 m-0 mb-2">{{ $t('full_name') }}: <span class="text-[#031529] font-medium">Ivan Ivanov</span></p>
+      <p class="tel p-0 m-0">{{ $t('phone') }}: <span class="text-[#031529] font-medium">+998 (99) 321-44-55</span></p>
     </div>
     <div class=" row justify-center bg-[#58636F]/10 h-full">
       <div class="q-pa-md w-[430px] overflow-y-auto text-[16px] leading-5">

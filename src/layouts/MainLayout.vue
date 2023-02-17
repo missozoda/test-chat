@@ -12,9 +12,28 @@
         />
 
         <q-toolbar-title class="text-[20px] lg:text-[28px] font-medium inline-block" >
-          {{this.currentUrl}}
+          {{$t(this.currentUrl)}}
         </q-toolbar-title>
 
+        <q-select
+        v-model="language"
+        :options="languages"
+        option-value="code"
+        option-label="name"
+        :display-value="language ? language.name : 'No'"
+        borderless
+        transition-show="flip-up"
+        transition-hide="flip-down"
+        color="blue-9"
+        class="q-mr-sm row items-center"
+      >
+        <template v-slot:selected="props">
+          <div class="fs-14 text-indigo-9">
+            {{this.languages_state.find(locale => locale.code === language).name}}
+          </div>
+        </template>
+
+      </q-select>
         <q-btn class="mr-[16px] md:mr-[32px] w-[26px] md:w-[32px] h-[26px] md:h-[32px]" flat dense round icon="notifications_none" aria-label="notification"></q-btn>
         <div v-if="$q.screen.width>=560" class="mr-[16px] md:mr-[32px]">
           <q-btn round flat :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'" @click="$q.fullscreen.toggle()"/>
@@ -46,6 +65,8 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
+// import {apiUrls, baseUrl} from "src/utils/const/apiUrls";
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import logo from '../assets/kadastr-logo.svg'
@@ -55,27 +76,27 @@ import '@quasar/extras/material-icons-outlined'
 const linksList = [
 
   {
-    title: 'Dashboard',
+    title: 'dashboard',
     icon: 'dashboard',
     link: '/dashboard'
   },
   {
-    title: 'Appeals',
+    title: 'appeals',
     icon: 'assignment',
     link: '/appeals'
   },
   {
-    title: 'Operators',
+    title: 'operators',
     icon: 'supervisor_account',
     link: '/operators'
   },
   {
-    title: 'Settings',
+    title: 'settings',
     icon: 'settings',
     link: '/settings'
   },
   {
-    title: 'Help',
+    title: 'help',
     icon: 'help_outline',
     link: '/help'
   },
@@ -86,16 +107,46 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink,
   },
   data:()=>({
     logo,
+    languages_state: [
+      {'name': 'O`zbek', 'code': 'uz'},
+        {'name': 'Русский', 'code': 'ru'},
+        {'name': 'English', 'code': 'en'}
+      ],
+      path: ''
     // currentUrl:localStorage.getItem('link') || "Dashboard",
   }),
   computed:{
     currentUrl(){
       return this.$router.currentRoute.value.name
-    }
+    },
+
+    language: {
+      get() {
+        if (!this.$i18n.locale) {
+          if (this.$i18n.locale = this.$store.state.user) {
+            this.$i18n.locale = this.$store.state.user.language;
+          } else {
+            this.$i18n.locale = 'uz';
+          }
+        }
+        console.log('---', this.languages_state.find(locale => locale.code === this.$i18n.locale).code)
+        // console.log('--', this.languages_state.find(locale => locale.code === this.$i18n.locale));
+        return this.languages_state.find(locale => locale.code === this.$i18n.locale).code;
+      },
+      set(langObj) {
+        this.$i18n.locale = langObj.code;
+        this.setLanguage(this.language);
+        // this.setUserLanguage(this.language)
+      }
+    },
+    
+    languages: function () {
+      return this.languages_state;
+    },
   },
 
   setup () {
@@ -113,7 +164,65 @@ export default defineComponent({
   methods:{
     getUrl(){
       this.currentUrl = localStorage.getItem('link')
-  },
-}
+    },
+
+    ...mapGetters([
+      'getUser',
+    ]),
+
+    ...mapMutations([
+      'setLanguage',
+    ]),
+
+    // setCurrLanguage() {
+    //   let user = this.getUser()
+    //   if (user == null) this.$router.push('/');
+    //   if (user) this.language = user.language ? user.language : 'uz';
+    //   this.setLanguage(this.language)
+    //   this.$i18n.locale = this.language
+    //   return
+    // },
+
+    reloadWindow() {
+      window.location.reload()
+    },
+
+    // logOut() {
+    //   this.$q.notify({
+    //     type: 'info',
+    //     message: this.$t('are_you_sure_logout'),
+    //     position: 'center',
+    //     timeout: 0,
+    //     color: 'blue',
+    //     actions: [
+    //       {
+    //         label: this.$t('no'), color: 'white', handler: () => {
+    //         }
+    //       },
+    //       {
+    //         label: this.$t('yes'), color: 'white', handler: () => {
+    //           this.$router.push('/');
+    //           this.bean = {}
+    //           this.$store.commit('clearUserSession');
+    //           setTimeout(fun => {
+    //             this.reloadWindow()
+    //           }, 1_00)
+
+    //         }
+    //       },
+    //     ]
+    //   })
+    // },
+
+    // setUserLanguage(language) {
+    //   this.$axios.put(apiUrls.USERS + '/lang?language=' + language, {}).then(res => {
+    //   }).catch(err => {
+    //   })
+    // },
+  }, 
+
+  mounted() {
+    // this.setCurrLanguage()
+  }
 })
 </script>

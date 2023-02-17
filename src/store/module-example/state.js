@@ -1,5 +1,8 @@
 export default function () {
   return {
-    router:""
+    user: {language: 'uz',},
+    language: 'uz',
+    routes: [],
+    currentRouteName: {}
   }
 }
